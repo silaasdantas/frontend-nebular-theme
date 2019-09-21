@@ -9,9 +9,13 @@ import {
   NbThemeModule,
   NbLayoutModule,
   NbSidebarModule,
-  NbMenuModule
+  NbMenuModule,
+  NbInputModule,
+  NbButtonModule,
+  NbCardModule
 } from "@nebular/theme";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
+import { NbPasswordAuthStrategy, NbAuthModule } from "@nebular/auth";
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +29,26 @@ import { NbEvaIconsModule } from "@nebular/eva-icons";
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbLayoutModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    NbInputModule,
+    NbButtonModule,
+    NbCardModule,
+
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: "email"
+        })
+      ],
+      forms: {
+        login: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true
+          }
+        }
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
